@@ -492,6 +492,90 @@
         font-size: 16px;
       }
 
+      .consent-details {
+        margin-top: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fafafa;
+        overflow: hidden;
+      }
+
+      .consent-details-summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .consent-details-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .consent-arrow {
+        flex-shrink: 0;
+        font-size: 12px;
+        line-height: 1;
+        color: var(--sub);
+        transition: transform 0.2s ease;
+      }
+
+      .consent-details[open] .consent-arrow {
+        transform: rotate(180deg);
+      }
+
+      .consent-details-body {
+        padding: 0 16px 18px;
+        font-size: 15px;
+        line-height: 1.65;
+        color: #374151;
+        border-top: 1px solid var(--line);
+      }
+
+      .consent-lead {
+        font-weight: 700;
+        margin: 14px 0 10px;
+      }
+
+      .consent-block-title {
+        font-weight: 700;
+        margin: 16px 0 8px;
+      }
+
+      .consent-details-body p {
+        margin: 0 0 12px;
+      }
+
+      .consent-check-wrap {
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid #fed7aa;
+        background: #fffbeb;
+      }
+
+      .consent-check-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        cursor: pointer;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      .consent-check-label input[type="checkbox"] {
+        width: 1.15em;
+        height: 1.15em;
+        margin-top: 0.25em;
+        flex-shrink: 0;
+        accent-color: var(--primary);
+        cursor: pointer;
+      }
+
       .comment-top {
         display: flex;
         align-items: center;
@@ -817,6 +901,65 @@
         .section-flow .notice-subtitle {
           font-size: 18px;
         }
+
+        .section-comment-event h2 {
+          font-size: 32px;
+        }
+
+        .section-comment-event .count-badge {
+          font-size: 20px;
+          padding: 10px 16px;
+        }
+
+        .section-comment-event input,
+        .section-comment-event textarea {
+          font-size: 22px;
+          padding: 16px 16px;
+        }
+
+        .section-comment-event .submit-btn {
+          font-size: 24px;
+          padding: 18px;
+        }
+
+        .section-comment-event .comment-submit-note {
+          font-size: 18px;
+        }
+
+        .section-comment-event .error {
+          font-size: 16px;
+        }
+
+        .section-comment-event .comment-example-badge {
+          font-size: 16px;
+          padding: 8px 16px;
+        }
+
+        .section-comment-event .comment-name {
+          font-size: 21px;
+        }
+
+        .section-comment-event .comment-time {
+          font-size: 16px;
+        }
+
+        .section-comment-event .comment-text {
+          font-size: 21px;
+        }
+
+        .section-comment-event .comment-item {
+          font-size: 21px;
+          padding: 16px;
+        }
+
+        .section-comment-event .page-btn {
+          font-size: 18px;
+          padding: 8px 12px;
+        }
+
+        .section-comment-event .comment-example {
+          padding: 28px 16px 18px;
+        }
       }
 
       .comment-item {
@@ -973,6 +1116,66 @@
       .section-flow .notice-subtitle {
         font-size: 20px;
       }
+
+      /* 사용 후기 댓글 이벤트 섹션만 약 1.5배 (section-flow 기준 덮어쓰기) */
+      .section-comment-event h2 {
+        font-size: 39px;
+      }
+
+      .section-comment-event .count-badge {
+        font-size: 24px;
+        padding: 12px 21px;
+      }
+
+      .section-comment-event input,
+      .section-comment-event textarea {
+        font-size: 26px;
+        padding: 21px 21px;
+      }
+
+      .section-comment-event .submit-btn {
+        font-size: 30px;
+        padding: 24px;
+      }
+
+      .section-comment-event .comment-submit-note {
+        font-size: 23px;
+      }
+
+      .section-comment-event .error {
+        font-size: 20px;
+      }
+
+      .section-comment-event .comment-example-badge {
+        font-size: 21px;
+        padding: 10px 24px;
+      }
+
+      .section-comment-event .comment-name {
+        font-size: 26px;
+      }
+
+      .section-comment-event .comment-time {
+        font-size: 20px;
+      }
+
+      .section-comment-event .comment-text {
+        font-size: 26px;
+      }
+
+      .section-comment-event .comment-item {
+        font-size: 26px;
+        padding: 21px;
+      }
+
+      .section-comment-event .page-btn {
+        font-size: 23px;
+        padding: 12px 18px;
+      }
+
+      .section-comment-event .comment-example {
+        padding: 36px 24px 24px;
+      }
     </style>
   </head>
   <body>
@@ -991,7 +1194,6 @@
       </section>
 
       <section class="hero-intro">
-        <h3>선생님의 AI 디지털 교육자료는 어떤가요?</h3>
         <p>
           <span class="hero-intro-single-line">수학/영어 3~6학년 AI 디지털 교육자료를 사용하고 계신</span><br />
           선생님들을 위한 특별한 이벤트!<br />
@@ -1040,7 +1242,7 @@
         <div class="event-prize-hero">
           <img
             class="event-prize-hero-img"
-            src="./present.png"
+            src="./present01.png"
             alt="경품 안내 이미지. 1등 1명 갤럭시탭, 2등 2명 갤럭시 버즈, 3등 3명 로지텍 키보드 마우스 세트."
             decoding="async"
             loading="lazy"
@@ -1085,21 +1287,45 @@
       </section>
 
       <section class="section section-flow">
-        <h2>참여 옵션 선택</h2>
-        <p class="desc">댓글 작성을 위해 아래 2가지 옵션 중 하나를 먼저 선택해주세요.</p>
-        <div class="choice-grid">
-          <button id="agreeBtn" class="choice-btn" type="button">
-            <p class="choice-title">동의하고 댓글 참여하기</p>
-            <p class="choice-sub">이벤트 안내 및 유의사항을 확인했고 참여에 동의합니다.</p>
-          </button>
-          <button id="laterBtn" class="choice-btn" type="button">
-            <p class="choice-title">나중에 할게요</p>
-            <p class="choice-sub">동의를 선택해야 댓글을 등록할 수 있습니다.</p>
-          </button>
+        <h2>개인정보 수집·이용 동의</h2>
+        <p class="desc">아래 동의에 체크하시면 아래 댓글 작성란이 활성화됩니다. 전문은 화살표를 눌러 확인할 수 있어요.</p>
+
+        <details class="consent-details" id="consentDetails">
+          <summary class="consent-details-summary">
+            <span>개인정보 수집·이용 안내 전문 보기</span>
+            <span class="consent-arrow" aria-hidden="true">▼</span>
+          </summary>
+          <div class="consent-details-body">
+            <p class="consent-lead">※ 개인정보 수집·이용 안내</p>
+            <p>
+              이벤트 참여 확인, 당첨자 선정 및 경품 발송을 위해 개인정보(소속 교육청, 학교명, 이름, 연락처)를 수집·이용합니다.
+            </p>
+            <p>
+              수집된 개인정보는 이벤트 운영, 본인 확인, 중복 참여 방지, 당첨 안내 및 경품 발송 목적으로만 이용되며 개인정보는 이벤트 종료 및 경품 발송 목적
+              달성 시 즉시 파기합니다.
+            </p>
+            <p class="consent-block-title">[개인정보 제3자 제공 안내]</p>
+            <p>
+              제공받는 자 : 다우기술<br />
+              제공 항목 : 이름, 연락처<br />
+              제공 목적 : 경품 발송<br />
+              보유 및 이용 기간 : 경품 발송 완료 시까지
+            </p>
+            <p>
+              ※ 개인정보 수집·이용 및 제3자 제공에 동의를 거부할 권리가 있으나 동의하지 않을 경우 이벤트 참여 및 경품 제공이 제한될 수 있습니다
+            </p>
+          </div>
+        </details>
+
+        <div class="consent-check-wrap">
+          <label class="consent-check-label" for="consentCheck">
+            <input type="checkbox" id="consentCheck" autocomplete="off" />
+            <span>위 사항을 모두 확인하였고, 개인정보 수집ㆍ이용하는 것에 동의합니다.</span>
+          </label>
         </div>
       </section>
 
-      <section class="section section-flow">
+      <section class="section section-flow section-comment-event">
         <div class="comment-top">
           <h2>사용 후기 댓글 이벤트</h2>
           <span id="countBadge" class="count-badge">실시간 0개</span>
@@ -1108,7 +1334,7 @@
         <form id="commentForm" accept-charset="UTF-8">
           <!-- 1페이지+2페이지 한 번에 제출 (구글폼 미리보기 소스 기준). 폼을 수정하면 entry ID·동의 문구를 다시 맞춰야 합니다. -->
           <input type="hidden" name="pageHistory" value="0,1" />
-          <!-- 2페이지: 개인정보 동의 체크박스 (entry.331149771) — 옵션 문구는 폼과 동일해야 합니다. -->
+          <!-- 2페이지: 개인정보 동의 체크박스 — 구글폼 해당 문항의 선택지 문장과 한 글자도 다르면 응답이 기록되지 않습니다. 폼 문구 변경 시 여기도 맞춰 주세요. -->
           <input type="hidden" name="entry.331149771" value="개인 정보 수집 및 이용에 동의 합니다." />
           <!-- 2페이지: 제출 안내 체크박스 (entry.1359851501) -->
           <input type="hidden" name="entry.1359851501" value="체크하고 제출 버튼을 클릭해주세요." />
@@ -1138,7 +1364,7 @@
               name="entry.718301232"
               inputmode="numeric"
               autocomplete="tel"
-              placeholder="연락처 (000-0000-0000, 목록에는 표시되지 않습니다)"
+              placeholder="연락처 (000-0000-0000, 상품 발송 및 경품 수령을 위한 용도로만 사용됩니다.)"
             />
           </div>
           <div class="field">
@@ -1237,15 +1463,19 @@
       const GOOGLE_FORM_POST_URL =
         "https://docs.google.com/forms/d/e/1FAIpQLSetNQmzD3ZhKT47DvWG0heb4rXJ_vo6tIMIIXxj7ux795L49A/formResponse";
 
+      /**
+       * 모두에게 동일한 댓글 목록: Google Apps Script 웹앱이 시트를 읽어 JSON 배열을 반환하는 URL.
+       * 비우면(기본) 이전처럼 브라우저 localStorage만 사용합니다. 공유 목록은 apps-script-comment-feed.gs 배포 후 여기에 URL을 넣으세요.
+       */
+      const COMMENTS_JSON_URL = "";
+
       const LOCAL_STORAGE_KEY = "aidt_comment_event_comments_v2";
       const state = {
-        choice: null,
         allComments: [],
         totalCount: 0
       };
 
-      const agreeBtn = document.getElementById("agreeBtn");
-      const laterBtn = document.getElementById("laterBtn");
+      const consentCheck = document.getElementById("consentCheck");
       const commentForm = document.getElementById("commentForm");
       const educationOfficeInput = document.getElementById("educationOfficeInput");
       const schoolInput = document.getElementById("schoolInput");
@@ -1258,7 +1488,7 @@
       const countBadge = document.getElementById("countBadge");
       const pagination = document.getElementById("pagination");
       const websiteInput = document.getElementById("websiteInput");
-      const PAGE_SIZE = 10;
+      const PAGE_SIZE = 20;
       const LAST_SUBMIT_KEY = "comment_last_submit_at";
       const SUBMIT_INTERVAL_MS = 15000;
       let currentPage = 1;
@@ -1326,6 +1556,59 @@
 
       function saveAllToStorage(list) {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list));
+      }
+
+      function usePublicCommentFeed() {
+        return String(COMMENTS_JSON_URL || "").trim().length > 0;
+      }
+
+      function sleep(ms) {
+        return new Promise(function (resolve) {
+          setTimeout(resolve, ms);
+        });
+      }
+
+      /**
+       * 공개 피드(COMMENTS_JSON_URL)가 있으면 시트 기반 목록을, 없으면 localStorage를 불러옵니다.
+       */
+      function refreshComments() {
+        if (!usePublicCommentFeed()) {
+          refreshFromStorage();
+          return Promise.resolve();
+        }
+        var url = String(COMMENTS_JSON_URL).trim();
+        return fetch(url + (url.indexOf("?") === -1 ? "?" : "&") + "cb=" + Date.now(), {
+          method: "GET",
+          cache: "no-store"
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("feed " + res.status);
+            return res.json();
+          })
+          .then(function (data) {
+            var list = Array.isArray(data) ? data : [];
+            state.allComments = list
+              .map(function (row, idx) {
+                return {
+                  id: Number(row.id) || idx + 1,
+                  nickname: String(row.nickname || "").trim(),
+                  message: String(row.message || "").trim(),
+                  createdAt: String(row.createdAt || "").trim()
+                };
+              })
+              .filter(function (row) {
+                return row.nickname && row.message;
+              });
+            state.allComments.sort(function (a, b) {
+              return (b.id || 0) - (a.id || 0);
+            });
+            renderComments();
+          })
+          .catch(function (err) {
+            console.error(err);
+            state.allComments = [];
+            renderComments();
+          });
       }
 
       /**
@@ -1425,36 +1708,24 @@
         renderComments();
       }
 
-      function updateChoiceUI() {
-        agreeBtn.classList.remove("active", "agree");
-        laterBtn.classList.remove("active", "later");
-        if (state.choice === "agree") agreeBtn.classList.add("active", "agree");
-        if (state.choice === "later") laterBtn.classList.add("active", "later");
-
-        var disabled = state.choice !== "agree";
-        educationOfficeInput.disabled = disabled;
-        schoolInput.disabled = disabled;
-        nicknameInput.disabled = disabled;
-        contactInput.disabled = disabled;
-        messageInput.disabled = disabled;
-        if (disabled) {
-          messageInput.placeholder = "옵션에서 '동의하고 댓글 참여하기'를 선택하면 입력할 수 있어요.";
-          setError("댓글 작성은 중간 섹션에서 동의를 선택한 경우에만 가능합니다.");
+      function updateConsentUI() {
+        var ok = consentCheck.checked;
+        educationOfficeInput.disabled = !ok;
+        schoolInput.disabled = !ok;
+        nicknameInput.disabled = !ok;
+        contactInput.disabled = !ok;
+        messageInput.disabled = !ok;
+        submitBtn.disabled = !ok;
+        if (!ok) {
+          messageInput.placeholder = "위에서 개인정보 수집·이용에 동의하시면 입력할 수 있어요.";
+          setError("댓글 작성은 개인정보 수집·이용 동의 후에만 가능합니다.");
         } else {
           messageInput.placeholder = "선생님의 수업에서의 활용법을 자유롭게 작성해주세요";
           setError("");
         }
       }
 
-      agreeBtn.addEventListener("click", function () {
-        state.choice = "agree";
-        updateChoiceUI();
-      });
-
-      laterBtn.addEventListener("click", function () {
-        state.choice = "later";
-        updateChoiceUI();
-      });
+      consentCheck.addEventListener("change", updateConsentUI);
 
       function clearBannedErrorOnInput(value) {
         if (containsBannedWord(value)) {
@@ -1482,9 +1753,17 @@
 
       commentForm.addEventListener("submit", function (event) {
         event.preventDefault();
+        void handleCommentSubmit().catch(function (e) {
+          console.error(e);
+          setError("등록 처리 중 오류가 발생했습니다.");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "댓글 등록";
+        });
+      });
 
-        if (state.choice !== "agree") {
-          setError("댓글 작성은 중간 섹션에서 동의를 선택한 경우에만 가능합니다.");
+      async function handleCommentSubmit() {
+        if (!consentCheck.checked) {
+          setError("개인정보 수집·이용에 동의해 주시면 댓글을 등록할 수 있습니다.");
           return;
         }
 
@@ -1528,10 +1807,31 @@
           return;
         }
 
+        if (usePublicCommentFeed()) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "확인 중...";
+          await refreshComments();
+        }
+
         var dkey = dedupeKeyFrom(educationOffice, school, nickname, contact, message);
-        var existing = loadAllFromStorage();
-        if (existing.some(function (row) { return row.dedupeKey === dkey; })) {
+        var existing = usePublicCommentFeed() ? state.allComments : loadAllFromStorage();
+        var dup = false;
+        if (usePublicCommentFeed()) {
+          var masked = maskName(nickname);
+          dup = existing.some(function (row) {
+            return row.message === message && row.nickname === masked;
+          });
+        } else {
+          dup = existing.some(function (row) {
+            return row.dedupeKey === dkey;
+          });
+        }
+        if (dup) {
           setError("중복 댓글은 등록할 수 없습니다.");
+          if (usePublicCommentFeed()) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "댓글 등록";
+          }
           return;
         }
 
@@ -1539,21 +1839,28 @@
         submitBtn.textContent = "등록 중...";
 
         try {
-          var id = Date.now();
-          var row = {
-            id: id,
-            dedupeKey: dkey,
-            nickname: maskName(nickname),
-            message: message,
-            createdAt: new Date().toLocaleString("ko-KR")
-          };
-          existing.unshift(row);
-          saveAllToStorage(existing);
+          if (!usePublicCommentFeed()) {
+            var id = Date.now();
+            var row = {
+              id: id,
+              dedupeKey: dkey,
+              nickname: maskName(nickname),
+              message: message,
+              createdAt: new Date().toLocaleString("ko-KR")
+            };
+            existing.unshift(row);
+            saveAllToStorage(existing);
+          }
 
           submitCommentFormToGoogle();
 
           currentPage = 1;
-          refreshFromStorage();
+          if (usePublicCommentFeed()) {
+            await sleep(2200);
+            await refreshComments();
+          } else {
+            refreshFromStorage();
+          }
           setError("");
           localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()));
 
@@ -1571,7 +1878,7 @@
           submitBtn.disabled = false;
           submitBtn.textContent = "댓글 등록";
         }
-      });
+      }
 
       pagination.addEventListener("click", function (event) {
         var target = event.target;
@@ -1585,8 +1892,9 @@
         renderComments();
       });
 
-      refreshFromStorage();
-      updateChoiceUI();
+      refreshComments().finally(function () {
+        updateConsentUI();
+      });
     </script>
   </body>
 </html>
