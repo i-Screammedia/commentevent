@@ -1,0 +1,1592 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>댓글 이벤트 랜딩</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <style>
+      :root {
+        --bg: #fff7ed;
+        --card: #ffffff;
+        --text: #111827;
+        --sub: #6b7280;
+        --line: #e5e7eb;
+        --primary: #ea580c;
+        --primary-soft: #ffedd5;
+        --danger: #e11d48;
+        --card-line: #fed7aa;
+        --card-shadow: 0 10px 24px rgba(180, 83, 9, 0.1), 0 2px 6px rgba(180, 83, 9, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          "Pretendard",
+          -apple-system,
+          BlinkMacSystemFont,
+          system-ui,
+          "Segoe UI",
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          "Malgun Gothic",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(180deg, #fff4ed 0%, #ffedd5 45%, #fdba74 100%);
+        color: var(--text);
+      }
+
+      .hero h1,
+      .hero-intro h3,
+      .event-guide-title,
+      h2 {
+        font-weight: 700;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        min-height: 100vh;
+        padding: 28px 20px 44px;
+      }
+
+      .section {
+        background: var(--card);
+        border: 1px solid var(--card-line);
+        border-radius: 30px;
+        padding: 24px;
+        box-shadow: var(--card-shadow);
+        margin-top: 20px;
+      }
+
+      .hero {
+        margin-top: 0;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, #fb923c 0%, #ea580c 100%);
+        padding: 30px 34px 54px;
+        border-radius: 38px;
+        text-align: left;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 16px 34px rgba(124, 45, 18, 0.28);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        left: -10%;
+        right: -10%;
+        bottom: -36px;
+        height: 78px;
+        background: #ffffff;
+        border-radius: 58% 42% 0 0 / 100% 100% 0 0;
+        opacity: 0.96;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        right: 70px;
+        bottom: -54px;
+        width: 120px;
+        height: 84px;
+        background: #ffffff;
+        border-radius: 0 0 100% 20%;
+        transform: rotate(-6deg);
+      }
+
+      .hero small {
+        display: inline-block;
+        opacity: 1;
+        font-weight: 700;
+        font-size: 20px;
+        color: #7c2d12;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.95);
+        border-radius: 999px;
+        padding: 7px 14px;
+      }
+
+      .hero h1 {
+        margin: 16px 0 0;
+        line-height: 1.15;
+        font-size: 72px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        color: #fffbeb;
+        text-shadow: 0 4px 10px rgba(124, 45, 18, 0.36);
+        text-align: center;
+      }
+
+      .hero-aidt {
+        display: inline-block;
+        padding: 2px 14px 4px;
+        border-radius: 14px;
+        background: linear-gradient(90deg, #ffd54f 0%, #ffb300 100%);
+        color: #7c2d12;
+        text-shadow: none;
+        box-shadow: 0 6px 14px rgba(124, 45, 18, 0.28);
+        border: 2px solid rgba(255, 255, 255, 0.75);
+        margin-right: 6px;
+      }
+
+      .hero-date {
+        margin: 0;
+        margin-top: 16px;
+        font-size: 34px;
+        font-weight: 800;
+        color: #ffd54f;
+        text-shadow: 0 4px 10px rgba(124, 45, 18, 0.32);
+      }
+
+      .hero-sub {
+        margin: 10px 0 0;
+        font-size: 20px;
+        line-height: 1.5;
+        color: #ffedd5;
+        font-weight: 600;
+      }
+
+      .top-brand {
+        margin-bottom: 14px;
+        text-align: center;
+        transform: scale(0.67);
+        transform-origin: top center;
+        margin-top: 0;
+        margin-bottom: -28px;
+      }
+
+      .top-brand-logo {
+        width: min(620px, 92%);
+        height: auto;
+      }
+
+      .top-brand-rank {
+        margin-top: 10px;
+        width: min(430px, 78%);
+        height: auto;
+      }
+
+      .top-brand-copy {
+        margin: 6px 0 0;
+        font-size: 34px;
+        line-height: 1.35;
+        font-weight: 800;
+        color: #5b616b;
+      }
+
+      .hero-intro {
+        margin: 20px auto 0;
+        text-align: center;
+        color: #374151;
+        max-width: 1200px;
+      }
+
+      .hero-intro h3 {
+        margin: 0;
+        color: #f97316;
+        font-size: 52px;
+        line-height: 1.25;
+        white-space: nowrap;
+      }
+
+      .hero-intro p {
+        margin: 8px 0 0;
+        font-size: 32px;
+        line-height: 1.45;
+        color: #4b5563;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .hero-intro-single-line {
+        white-space: nowrap;
+        display: inline-block;
+      }
+
+      .event-guide {
+        border: 1px solid #fed7aa;
+        background: linear-gradient(180deg, #fffdfb 0%, #fff7ed 100%);
+        box-shadow: 0 14px 28px rgba(180, 83, 9, 0.12), 0 2px 8px rgba(180, 83, 9, 0.06);
+      }
+
+      .event-guide-head {
+        margin-top: 26px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .event-guide-title {
+        margin: 0;
+        text-align: center;
+        font-size: 44px;
+        font-weight: 900;
+        color: #c2410c;
+        line-height: 1;
+      }
+
+      .event-guide-title b {
+        color: #111827;
+        font-weight: 900;
+      }
+
+      .event-guide-icon {
+        font-size: 42px;
+        line-height: 1;
+      }
+
+      .event-guide-list {
+        margin-top: 0;
+        display: grid;
+        gap: 16px;
+      }
+
+      .event-guide-row {
+        display: grid;
+        grid-template-columns: 138px 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .event-guide-chip {
+        border-radius: 999px;
+        padding: 10px 14px;
+        text-align: center;
+        font-weight: 800;
+        color: #fff;
+        font-size: 23px;
+        letter-spacing: -0.02em;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        background: linear-gradient(90deg, #fb923c 0%, #ea580c 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34), 0 4px 10px rgba(194, 65, 12, 0.25);
+      }
+
+      .event-guide-text {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 700;
+        color: #1f2937;
+        letter-spacing: -0.03em;
+      }
+
+      .event-guide-date {
+        font-size: 43px;
+      }
+
+      .event-guide-note {
+        margin: 6px 0 0;
+        font-size: 24px;
+        font-weight: 900;
+        line-height: 1.35;
+        color: #c26767;
+        letter-spacing: -0.02em;
+      }
+
+      .event-guide-body {
+        display: grid;
+        grid-template-columns: 1fr 180px;
+        gap: 8px 18px;
+        align-items: end;
+      }
+
+      .event-guide-deco {
+        align-self: end;
+        justify-self: end;
+        width: 160px;
+        height: 120px;
+        border-radius: 18px;
+        border: 2px solid #fdba74;
+        background: linear-gradient(180deg, #fffdfb 0%, #ffedd5 100%);
+        box-shadow: 0 6px 14px rgba(234, 88, 12, 0.16);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .event-guide-deco img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .event-guide-deco-fallback {
+        display: none;
+        font-size: 54px;
+      }
+
+      .event-guide-deco.is-fallback .event-guide-deco-fallback {
+        display: block;
+      }
+
+      .event-guide-body--single {
+        grid-template-columns: 1fr;
+      }
+
+      .event-prize-banner {
+        padding-top: 14px;
+        padding-bottom: 16px;
+      }
+
+      .event-prize-hero {
+        margin: 0;
+        border-radius: 22px;
+        overflow: hidden;
+        border: 1px solid rgba(251, 146, 60, 0.45);
+        box-shadow:
+          0 12px 32px rgba(124, 45, 18, 0.18),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        line-height: 0;
+        background: #0c1222;
+      }
+
+      .event-prize-hero-img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      .desc {
+        margin: 8px 0 0;
+        color: var(--sub);
+        font-size: 14px;
+      }
+
+      .excellent-benefits-title {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 900;
+        color: #0f172a;
+        letter-spacing: -0.04em;
+        line-height: 1.28;
+        text-align: center;
+      }
+
+      .excellent-benefits-grid {
+        margin-top: 22px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .excellent-benefit-card {
+        border-radius: 24px;
+        border: 2px solid #a78bfa;
+        background: linear-gradient(165deg, #ffffff 0%, #f5f3ff 38%, #ede9fe 100%);
+        padding: 22px 22px 20px;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow:
+          0 4px 6px rgba(79, 70, 229, 0.06),
+          0 14px 32px rgba(79, 70, 229, 0.14),
+          inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      }
+
+      .excellent-benefit-index {
+        font-size: 22px;
+        font-weight: 900;
+        color: #4338ca;
+        letter-spacing: 0.06em;
+        line-height: 1;
+      }
+
+      .excellent-benefit-text {
+        margin: 0;
+        font-size: 21px;
+        font-weight: 900;
+        color: #111827;
+        line-height: 1.42;
+        letter-spacing: -0.03em;
+      }
+
+      .excellent-benefit-icon {
+        margin-top: 10px;
+        align-self: center;
+        width: 132px;
+        height: 132px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: drop-shadow(0 6px 14px rgba(67, 56, 202, 0.2));
+      }
+
+      .excellent-benefit-icon svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .excellent-benefits-note {
+        margin: 22px 0 0;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: #4b5563;
+        line-height: 1.55;
+      }
+
+      .choice-grid {
+        margin-top: 12px;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .choice-btn {
+        width: 100%;
+        text-align: left;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 14px;
+        background: #fff;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04);
+        transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+      }
+
+      .choice-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 16px rgba(17, 24, 39, 0.1);
+      }
+
+      .choice-btn.active.agree {
+        border-color: #ea580c;
+        background: #fff7ed;
+        box-shadow: 0 0 0 2px #fed7aa;
+      }
+
+      .choice-btn.active.later {
+        border-color: #9ca3af;
+        background: #f9fafb;
+        box-shadow: 0 0 0 2px #e5e7eb;
+      }
+
+      .choice-title {
+        margin: 0;
+        font-weight: 700;
+        font-size: 20px;
+      }
+
+      .choice-sub {
+        margin: 5px 0 0;
+        color: var(--sub);
+        font-size: 16px;
+      }
+
+      .comment-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .count-badge {
+        border-radius: 999px;
+        padding: 8px 14px;
+        background: var(--primary-soft);
+        color: #9a3412;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .field {
+        margin-top: 10px;
+      }
+
+      .bot-trap {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      input,
+      textarea,
+      button {
+        font: inherit;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        outline: none;
+        background: #fff;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: #fb923c;
+      }
+
+      input:disabled,
+      textarea:disabled {
+        background: #f3f4f6;
+        cursor: not-allowed;
+      }
+
+      textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        margin-top: 10px;
+        width: 100%;
+        border: 0;
+        border-radius: 12px;
+        padding: 14px;
+        color: #fff;
+        background: var(--primary);
+        font-weight: 700;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .submit-btn:disabled {
+        background: #cbd5e1;
+        cursor: not-allowed;
+      }
+
+      .error {
+        margin-top: 8px;
+        color: var(--danger);
+        font-size: 12px;
+      }
+
+      .comment-submit-note {
+        margin: 10px 0 0;
+        font-size: 13px;
+        line-height: 1.55;
+        color: #57534e;
+      }
+
+      .comment-example-wrap {
+        position: relative;
+        margin-top: 22px;
+        padding-top: 12px;
+      }
+
+      .comment-example-badge {
+        position: absolute;
+        top: 0;
+        left: 14px;
+        z-index: 2;
+        background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%);
+        color: #fff;
+        font-weight: 800;
+        font-size: 13px;
+        padding: 7px 16px;
+        border-radius: 999px;
+        transform: rotate(-7deg);
+        box-shadow: 0 3px 12px rgba(12, 74, 110, 0.35);
+        letter-spacing: -0.02em;
+      }
+
+      .comment-example {
+        margin: 0;
+        border: 1px solid #7dd3fc;
+        border-radius: 20px;
+        background: linear-gradient(165deg, #e0f2fe 0%, #dbeafe 55%, #e0f7fa 100%);
+        padding: 26px 16px 16px;
+        box-shadow: 0 4px 14px rgba(14, 116, 144, 0.12);
+      }
+
+      .comment-example .comment-text {
+        margin-top: 10px;
+        line-height: 1.55;
+        word-break: break-word;
+      }
+
+      .comment-example-wrap > .comment-example + .comment-example {
+        margin-top: 12px;
+        padding-top: 16px;
+      }
+
+      .comment-list {
+        list-style: none;
+        margin: 14px 0 0;
+        padding: 0;
+        display: grid;
+        gap: 8px;
+      }
+
+      .pagination {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+      }
+
+      .page-btn {
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 8px;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+
+      .page-btn.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .page-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          max-width: 430px;
+          padding: 20px 14px 28px;
+          background: var(--bg);
+        }
+
+        .section {
+          border-radius: 24px;
+          padding: 18px;
+        }
+
+        .top-brand {
+          transform: none;
+          margin-top: 0;
+          margin-bottom: 14px;
+        }
+
+        .hero {
+          text-align: left;
+        }
+
+        .top-brand-copy {
+          font-size: 22px;
+        }
+
+        .hero h1 {
+          font-size: 42px;
+        }
+
+        .hero p {
+          font-size: 18px;
+        }
+
+        .hero-card {
+          font-size: 22px;
+        }
+
+        .hero-intro {
+          margin-top: 16px;
+          max-width: 100%;
+        }
+
+        .hero-intro h3 {
+          font-size: 38px;
+          white-space: normal;
+        }
+
+        .hero-intro p {
+          font-size: 24px;
+        }
+
+        .hero-intro-single-line {
+          white-space: normal;
+        }
+
+        .choice-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .excellent-benefits-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .excellent-benefits-title {
+          font-size: 22px;
+        }
+
+        .excellent-benefit-index {
+          font-size: 19px;
+        }
+
+        .excellent-benefit-text {
+          font-size: 18px;
+        }
+
+        .excellent-benefit-icon {
+          width: 108px;
+          height: 108px;
+        }
+
+        .excellent-benefits-note {
+          font-size: 16px;
+        }
+
+        .event-guide-title {
+          font-size: 32px;
+        }
+
+        .event-guide-icon {
+          font-size: 32px;
+        }
+
+        .event-guide-body {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .event-guide-deco {
+          width: 120px;
+          height: 92px;
+          border-radius: 14px;
+          font-size: 44px;
+          justify-self: end;
+        }
+
+        .event-guide-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .event-guide-text {
+          font-size: 18px;
+        }
+
+        .event-guide-date {
+          font-size: 20px;
+        }
+
+        .event-guide-note {
+          font-size: 16px;
+        }
+
+        .comment-example-badge {
+          font-size: 12px;
+          padding: 6px 12px;
+          left: 10px;
+        }
+
+        .comment-example {
+          padding: 22px 14px 14px;
+        }
+
+        .section-flow h2 {
+          font-size: 23px;
+        }
+
+        .section-flow .notice-title {
+          font-size: 25px;
+        }
+
+        .section-flow .choice-title {
+          font-size: 21px;
+        }
+
+        .section-flow .choice-sub {
+          font-size: 17px;
+        }
+
+        .section-flow .notice-list {
+          font-size: 17px;
+        }
+
+        .section-flow .notice-subtitle {
+          font-size: 18px;
+        }
+      }
+
+      .comment-item {
+        border: 1px solid #ffedd5;
+        border-radius: 18px;
+        background: #fffdfb;
+        padding: 12px;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      }
+
+      .comment-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .comment-name {
+        margin: 0;
+        font-weight: 700;
+      }
+
+      .comment-time {
+        margin: 0;
+        font-size: 12px;
+        color: #9ca3af;
+      }
+
+      .comment-text {
+        margin: 8px 0 0;
+        color: #374151;
+        line-height: 1.45;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .notice-section {
+        margin-top: 18px;
+        border-radius: 28px;
+        border: 1px solid #fde68a;
+        background: linear-gradient(180deg, #fffdf2 0%, #fff8dd 100%);
+        padding: 20px 22px;
+        box-shadow: 0 10px 22px rgba(180, 83, 9, 0.1), 0 2px 6px rgba(180, 83, 9, 0.06);
+      }
+
+      .notice-title {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 900;
+        color: #92400e;
+      }
+
+      .notice-list {
+        margin: 10px 0 0;
+        padding-left: 18px;
+        color: #4b5563;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .notice-list li + li {
+        margin-top: 6px;
+      }
+
+      .notice-subtitle {
+        margin: 18px 0 0;
+        font-size: 18px;
+        font-weight: 800;
+        color: #b45309;
+      }
+
+      .notice-list--winner {
+        margin-top: 8px;
+      }
+
+      /* 참여 옵션 · 댓글 이벤트 · 유의사항 구간 가독성 */
+      .section-flow h2 {
+        font-size: 26px;
+      }
+
+      .section-flow .desc {
+        font-size: 16px;
+      }
+
+      .section-flow .choice-title {
+        font-size: 23px;
+      }
+
+      .section-flow .choice-sub {
+        font-size: 18px;
+      }
+
+      .section-flow .choice-btn {
+        padding: 16px 16px;
+      }
+
+      .section-flow .count-badge {
+        font-size: 16px;
+      }
+
+      .section-flow input,
+      .section-flow textarea {
+        font-size: 17px;
+        padding: 14px 14px;
+      }
+
+      .section-flow .submit-btn {
+        font-size: 20px;
+        padding: 16px;
+      }
+
+      .section-flow .comment-submit-note {
+        font-size: 15px;
+      }
+
+      .section-flow .error {
+        font-size: 13px;
+      }
+
+      .section-flow .comment-example-badge {
+        font-size: 14px;
+      }
+
+      .section-flow .comment-name {
+        font-size: 17px;
+      }
+
+      .section-flow .comment-time {
+        font-size: 13px;
+      }
+
+      .section-flow .comment-text {
+        font-size: 17px;
+      }
+
+      .section-flow .comment-item {
+        font-size: 17px;
+        padding: 14px;
+      }
+
+      .section-flow .page-btn {
+        font-size: 15px;
+        padding: 8px 12px;
+      }
+
+      .section-flow .notice-title {
+        font-size: 28px;
+      }
+
+      .section-flow .notice-list {
+        font-size: 18px;
+      }
+
+      .section-flow .notice-subtitle {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section class="top-brand">
+        <img class="top-brand-logo" src="./i-screammedia-logo.png" alt="i-Scream media 로고" />
+        <img class="top-brand-rank" src="./rank-1-hero-nobg-cropped.png" alt="1위 강조 배지" />
+        <p class="top-brand-copy">1위 교과서 아이스크림이 만든 AI 디지털 교육자료는 다릅니다.</p>
+      </section>
+
+      <section class="section hero">
+        <small>댓글 이벤트</small>
+        <h1><span class="hero-aidt">AI 디지털 교육자료</span> 활용에 대한<br />선생님의 아이디어를 들려주세요!</h1>
+        <p class="hero-date">참여 기간 5/18~5/31</p>
+        <p class="hero-sub">선생님의 수업 활용 경험을 자유롭게 작성해 주세요.</p>
+      </section>
+
+      <section class="hero-intro">
+        <h3>선생님의 AI 디지털 교육자료는 어떤가요?</h3>
+        <p>
+          <span class="hero-intro-single-line">수학/영어 3~6학년 AI 디지털 교육자료를 사용하고 계신</span><br />
+          선생님들을 위한 특별한 이벤트!<br />
+          <span class="hero-intro-single-line">학교에서 사용하고 계신 다양한 수업 활용 방안들을 공유해주세요.</span>
+        </p>
+      </section>
+
+      <div class="event-guide-head">
+        <span class="event-guide-icon">📣</span>
+        <h2 class="event-guide-title">이벤트 <b>안내</b></h2>
+      </div>
+      <section class="section event-guide">
+        <div class="event-guide-body">
+          <div class="event-guide-list">
+            <div class="event-guide-row">
+              <p class="event-guide-chip">이벤트 기간</p>
+              <p class="event-guide-text event-guide-date">2026년 5월 18일(월) ~ 5월 31일(일)</p>
+            </div>
+            <div class="event-guide-row">
+              <p class="event-guide-chip">참여 대상</p>
+              <p class="event-guide-text">아이스크림 AI 디지털 교육자료를 사용 중인<br />전국의 초등학교 선생님</p>
+            </div>
+            <div class="event-guide-row">
+              <p class="event-guide-chip">참여 방법</p>
+              <div>
+                <p class="event-guide-text">활용 사례를 댓글로 작성 후 등록</p>
+              </div>
+            </div>
+            <div class="event-guide-row">
+              <p class="event-guide-chip">참여 혜택</p>
+              <p class="event-guide-text">활용 후기 댓글 중 추첨을 통해 푸짐한 경품을 드립니다.</p>
+            </div>
+          </div>
+          <div class="event-guide-deco" aria-hidden="true">
+            <img
+              src="./gift.png"
+              alt=""
+              onerror="this.style.display='none'; this.parentElement.classList.add('is-fallback');"
+            />
+            <span class="event-guide-deco-fallback">🎁</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section event-guide event-prize-banner" aria-label="경품 안내">
+        <div class="event-prize-hero">
+          <img
+            class="event-prize-hero-img"
+            src="./present.png"
+            alt="경품 안내 이미지. 1등 1명 갤럭시탭, 2등 2명 갤럭시 버즈, 3등 3명 로지텍 키보드 마우스 세트."
+            decoding="async"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <section class="section excellent-benefits" aria-label="우수 후기 작성 선생님께 제공되는 특별한 혜택">
+        <h2 class="excellent-benefits-title">우수 후기 작성 선생님께 제공되는 특별한 혜택</h2>
+        <div class="excellent-benefits-grid">
+          <article class="excellent-benefit-card">
+            <span class="excellent-benefit-index">01</span>
+            <p class="excellent-benefit-text">AI 디지털 교육자료 수업사례 공유회 참가 지원 (강사비)</p>
+            <div class="excellent-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="14" width="64" height="44" rx="6" fill="#e0e7ff" stroke="#818cf8" stroke-width="2" />
+                <rect x="14" y="20" width="36" height="6" rx="2" fill="#a5b4fc" />
+                <rect x="14" y="30" width="52" height="4" rx="1" fill="#c7d2fe" />
+                <rect x="14" y="38" width="44" height="4" rx="1" fill="#c7d2fe" />
+                <circle cx="58" cy="48" r="10" fill="#fcd34d" stroke="#f59e0b" stroke-width="2" />
+                <path d="M54 48h8M58 44v8" stroke="#92400e" stroke-width="2" stroke-linecap="round" />
+                <rect x="28" y="58" width="24" height="6" rx="2" fill="#94a3b8" />
+              </svg>
+            </div>
+          </article>
+          <article class="excellent-benefit-card">
+            <span class="excellent-benefit-index">02</span>
+            <p class="excellent-benefit-text">아이스크림과 함께 하는 연수 강사 활동 기회</p>
+            <div class="excellent-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="40" cy="52" rx="26" ry="10" fill="#e0e7ff" />
+                <circle cx="28" cy="34" r="10" fill="#fde68a" stroke="#f59e0b" stroke-width="2" />
+                <path d="M24 42c2 6 8 10 16 10s14-4 16-10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+                <circle cx="52" cy="32" r="9" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2" />
+                <path d="M48 40c3 5 8 8 14 8" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" />
+                <rect x="34" y="22" width="12" height="8" rx="2" fill="#fca5a5" />
+              </svg>
+            </div>
+          </article>
+        </div>
+        <p class="excellent-benefits-note">우수 사례에 선정된 선생님께 추가 상세 안내 예정입니다.</p>
+      </section>
+
+      <section class="section section-flow">
+        <h2>참여 옵션 선택</h2>
+        <p class="desc">댓글 작성을 위해 아래 2가지 옵션 중 하나를 먼저 선택해주세요.</p>
+        <div class="choice-grid">
+          <button id="agreeBtn" class="choice-btn" type="button">
+            <p class="choice-title">동의하고 댓글 참여하기</p>
+            <p class="choice-sub">이벤트 안내 및 유의사항을 확인했고 참여에 동의합니다.</p>
+          </button>
+          <button id="laterBtn" class="choice-btn" type="button">
+            <p class="choice-title">나중에 할게요</p>
+            <p class="choice-sub">동의를 선택해야 댓글을 등록할 수 있습니다.</p>
+          </button>
+        </div>
+      </section>
+
+      <section class="section section-flow">
+        <div class="comment-top">
+          <h2>사용 후기 댓글 이벤트</h2>
+          <span id="countBadge" class="count-badge">실시간 0개</span>
+        </div>
+
+        <form id="commentForm" accept-charset="UTF-8">
+          <!-- 1페이지+2페이지 한 번에 제출 (구글폼 미리보기 소스 기준). 폼을 수정하면 entry ID·동의 문구를 다시 맞춰야 합니다. -->
+          <input type="hidden" name="pageHistory" value="0,1" />
+          <!-- 2페이지: 개인정보 동의 체크박스 (entry.331149771) — 옵션 문구는 폼과 동일해야 합니다. -->
+          <input type="hidden" name="entry.331149771" value="개인 정보 수집 및 이용에 동의 합니다." />
+          <!-- 2페이지: 제출 안내 체크박스 (entry.1359851501) -->
+          <input type="hidden" name="entry.1359851501" value="체크하고 제출 버튼을 클릭해주세요." />
+          <div class="field">
+            <input
+              id="educationOfficeInput"
+              type="text"
+              name="entry.1679036734"
+              placeholder="소속 교육청 (예: 서울)"
+            />
+          </div>
+          <div class="field">
+            <input id="schoolInput" type="text" name="entry.2133529315" placeholder="소속 학교" />
+          </div>
+          <div class="field">
+            <input
+              id="nicknameInput"
+              type="text"
+              name="entry.400100134"
+              placeholder="이름 (실명, 댓글 목록에는 마스킹되어 표시됩니다)"
+            />
+          </div>
+          <div class="field">
+            <input
+              id="contactInput"
+              type="tel"
+              name="entry.718301232"
+              inputmode="numeric"
+              autocomplete="tel"
+              placeholder="연락처 (000-0000-0000, 목록에는 표시되지 않습니다)"
+            />
+          </div>
+          <div class="field">
+            <textarea
+              id="messageInput"
+              name="entry.726953345"
+              placeholder="선생님의 수업에서의 활용법을 자유롭게 작성해주세요"
+            ></textarea>
+          </div>
+          <div class="bot-trap" aria-hidden="true">
+            <label>이 필드는 비워두세요 <input id="websiteInput" type="text" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <button id="submitBtn" class="submit-btn" type="submit">댓글 등록</button>
+          <p class="comment-submit-note">
+            등록된 댓글은 이 페이지에서 수정하거나 삭제할 수 없습니다. 댓글 등록 전에 내용을 한 번 더 확인해 주세요.
+          </p>
+          <p id="errorText" class="error" aria-live="polite"></p>
+        </form>
+
+        <div class="comment-example-wrap" role="region" aria-label="댓글 작성 예시">
+          <span class="comment-example-badge">작성 예시</span>
+          <div class="comment-example">
+            <div class="comment-meta">
+              <p class="comment-name">김**</p>
+              <p class="comment-time">2026-05-01</p>
+            </div>
+            <p class="comment-text">영어 수업에 AI 디지털 교육자료를 사용해서 발음 연습도 하고 단어도 여러 플래시 카드 형태로 학습을 시켜보니 아이들 참여가 눈에 띄게 좋아졌어요. 수준별로 반복 연습이 가능해 아쉬웠던 격차를 줄일 수 있어 계속 활용할 예정입니다.</p>
+          </div>
+          <div class="comment-example">
+            <div class="comment-meta">
+              <p class="comment-name">최**</p>
+              <p class="comment-time">2026-05-02</p>
+            </div>
+            <p class="comment-text">수학 시간에 단원 도입 영상과 과제 등을 AI 디지털 교육자료를 활용해서 진행했더니 집중하는 학생이 확실히 늘었어요. 설명만 반복하던 수업에서 벗어나 아이들이 스스로 탐구할 시간이 생겨 만족스럽습니다.</p>
+          </div>
+          <div class="comment-example">
+            <div class="comment-meta">
+              <p class="comment-name">권**</p>
+              <p class="comment-time">2026-05-03</p>
+            </div>
+            <p class="comment-text">학급 수준 편차가 커 과제 제출하기가 어려웠는데, 성취 기준별로 과제를 내고 가지고 있는 자료로도 바로 출제 할 수 있어서 준비 시간이 줄었어요.</p>
+          </div>
+        </div>
+
+        <ul id="commentList" class="comment-list"></ul>
+        <div id="pagination" class="pagination"></div>
+      </section>
+
+      <section class="notice-section section-flow">
+        <h2 class="notice-title">유의 사항</h2>
+        <ol class="notice-list">
+          <li>1인 1회 참여 가능하며, 중복 참여 시 최초 1건만 인정됩니다.</li>
+          <li>의미없는 내용 또는 주제와 무관한 내용 작성 시 관리자에 의해 삭제되며 참여가 인정되지 않습니다.</li>
+          <li>등록이 완료된 댓글은 참여자 본인이 이 페이지에서 수정·삭제할 수 없습니다. 오타·내용 수정이 필요하면 등록 전에 반드시 확인해 주세요.</li>
+          <li>경품은 이벤트 종료 후 참여 시 입력한 휴대폰번호로 일괄 발송됩니다.</li>
+          <li>이벤트 참여시 입력한 정보가 부정확하여 경품을 수령하지 못한 경우 재발송이 불가합니다.</li>
+          <li>이벤트 내용은 상황에 따라 조기 종료 혹은 변경될 수 있으며, 변경시 경품은 동일 조건의 다른 상품으로 변경됩니다.</li>
+          <li>작성한 활용 소감은 마케팅 및 서비스 개선에 활용될 수 있습니다.</li>
+        </ol>
+
+        <h3 class="notice-subtitle">경품 당첨자 유의 사항</h3>
+        <ol class="notice-list notice-list--winner">
+          <li>
+            당첨자 선정·발표 일정 및 개별 안내(문자 등)는 운영 정책에 따르며, 안내에 따라 기한 내 회신 또는 추가 정보 제출이 필요할 수 있습니다. 기한 내
+            미이행 시 당첨이 취소될 수 있습니다.
+          </li>
+          <li>경품은 현금으로 교환할 수 없으며, 정해진 수령 방법 외의 양도·판매는 제한될 수 있습니다.</li>
+          <li>
+            본 이벤트 경품과 관련하여 발생할 수 있는 제세공과금(기타소득에 따른 세액 등)은 현재 회사가 부담합니다. 관련 법령 또는 사내 정책 변경 시
+            별도로 안내될 수 있습니다.
+          </li>
+          <li>
+            제세공과금 처리 및 경품 지급을 위해 관계 법령 및 내부 규정에 따라 신분 확인·추가 서류 제출 등이 필요할 수 있으며, 요청 자료 미제출 또는 허위
+            정보가 확인될 경우 당첨이 취소될 수 있습니다.
+          </li>
+          <li>이벤트 규정 위반·부정 참여로 판단되는 경우 당첨이 취소될 수 있습니다.</li>
+        </ol>
+      </section>
+    </main>
+
+    <script>
+      const BANNED_WORDS = ["욕설", "비방", "광고", "도박", "음란", "시발", "병신", "개새", "미친", "ㅅㅂ", "ㅂㅅ", "ㅄ"];
+      const BANNED_PATTERNS = [
+        /시\s*발/i,
+        /병\s*신/i,
+        /개\s*새/i,
+        /미\s*친/i,
+        /ㅅ\s*ㅂ/i,
+        /ㅂ\s*ㅅ/i
+      ];
+
+      /**
+       * 구글폼 POST 전용 URL (미리보기 HTML의 form action과 동일해야 응답 시트에 기록됩니다).
+       * 편집·공유용 짧은 주소(/d/1PUE6m0…/formResponse)로 POST하면 누락될 수 있습니다.
+       */
+      const GOOGLE_FORM_POST_URL =
+        "https://docs.google.com/forms/d/e/1FAIpQLSetNQmzD3ZhKT47DvWG0heb4rXJ_vo6tIMIIXxj7ux795L49A/formResponse";
+
+      const LOCAL_STORAGE_KEY = "aidt_comment_event_comments_v2";
+      const state = {
+        choice: null,
+        allComments: [],
+        totalCount: 0
+      };
+
+      const agreeBtn = document.getElementById("agreeBtn");
+      const laterBtn = document.getElementById("laterBtn");
+      const commentForm = document.getElementById("commentForm");
+      const educationOfficeInput = document.getElementById("educationOfficeInput");
+      const schoolInput = document.getElementById("schoolInput");
+      const nicknameInput = document.getElementById("nicknameInput");
+      const contactInput = document.getElementById("contactInput");
+      const messageInput = document.getElementById("messageInput");
+      const submitBtn = document.getElementById("submitBtn");
+      const errorText = document.getElementById("errorText");
+      const commentList = document.getElementById("commentList");
+      const countBadge = document.getElementById("countBadge");
+      const pagination = document.getElementById("pagination");
+      const websiteInput = document.getElementById("websiteInput");
+      const PAGE_SIZE = 10;
+      const LAST_SUBMIT_KEY = "comment_last_submit_at";
+      const SUBMIT_INTERVAL_MS = 15000;
+      let currentPage = 1;
+
+      function normalizeText(value) {
+        return value.trim().toLowerCase().replace(/\s+/g, " ");
+      }
+
+      function containsBannedWord(value) {
+        const normalized = value.toLowerCase();
+        const compact = normalized.replace(/\s+/g, "");
+        return (
+          BANNED_WORDS.some((word) => normalized.includes(word) || compact.includes(word)) ||
+          BANNED_PATTERNS.some((pattern) => pattern.test(value))
+        );
+      }
+
+      function setError(message) {
+        errorText.textContent = message || "";
+      }
+
+      function maskName(name) {
+        if (!name) return "";
+        if (name.length === 1) return name;
+        return name[0] + "*".repeat(name.length - 1);
+      }
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function dedupeKeyFrom(office, school, nickname, contact, message) {
+        return (
+          normalizeText(office) +
+          "|" +
+          normalizeText(school) +
+          "|" +
+          normalizeText(nickname) +
+          "|" +
+          normalizeText(contact) +
+          "|" +
+          normalizeText(message)
+        );
+      }
+
+      /** 구글폼 연락처 항목과 동일: 000-0000-0000 (가운데 3~4자리) */
+      function isValidContactFormat(value) {
+        return /^\d{3}-\d{3,4}-\d{4}$/.test(String(value || "").trim());
+      }
+
+      function loadAllFromStorage() {
+        try {
+          const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+          const parsed = raw ? JSON.parse(raw) : [];
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (_) {
+          return [];
+        }
+      }
+
+      function saveAllToStorage(list) {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list));
+      }
+
+      /**
+       * 구글폼 formResponse 로 전송 (메인 폼 + 숨김 iframe).
+       * name="submit" 숨은 필드나 임시 폼 복제는 구글 측에서 거절되는 사례가 있어, 동작 확인된 방식으로 유지합니다.
+       * 입력값 비우기는 호출부에서 지연시켜 POST 직렬화가 비는 일을 막습니다.
+       */
+      function submitCommentFormToGoogle() {
+        var iframe = document.getElementById("gfSilentFrame");
+        if (!iframe) {
+          iframe = document.createElement("iframe");
+          iframe.id = "gfSilentFrame";
+          iframe.name = "gfSilentFrame";
+          iframe.title = "구글폼 전송";
+          iframe.style.cssText = "position:absolute;width:0;height:0;border:0;visibility:hidden";
+          iframe.setAttribute("aria-hidden", "true");
+          document.body.appendChild(iframe);
+        }
+        var form = commentForm;
+        form.setAttribute("action", GOOGLE_FORM_POST_URL);
+        form.setAttribute("method", "POST");
+        form.setAttribute("target", "gfSilentFrame");
+        form.submit();
+        setTimeout(function () {
+          form.removeAttribute("action");
+          form.removeAttribute("method");
+          form.removeAttribute("target");
+        }, 800);
+      }
+
+      function getPageSlice() {
+        var total = state.allComments.length;
+        var totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+        if (currentPage > totalPages) currentPage = totalPages;
+        var start = (currentPage - 1) * PAGE_SIZE;
+        return state.allComments.slice(start, start + PAGE_SIZE);
+      }
+
+      function renderComments() {
+        state.totalCount = state.allComments.length;
+        var totalPages = Math.max(1, Math.ceil(state.totalCount / PAGE_SIZE));
+        countBadge.textContent = "실시간 " + state.totalCount + "개";
+        var pageItems = getPageSlice();
+        commentList.innerHTML = pageItems
+          .map(function (item) {
+            return (
+              '<li class="comment-item">' +
+              '<div class="comment-meta">' +
+              '<p class="comment-name">' +
+              escapeHtml(item.nickname) +
+              "</p>" +
+              '<p class="comment-time">' +
+              escapeHtml(item.createdAt) +
+              "</p>" +
+              "</div>" +
+              '<p class="comment-text">' +
+              escapeHtml(item.message) +
+              "</p>" +
+              "</li>"
+            );
+          })
+          .join("");
+        renderPagination(totalPages);
+      }
+
+      function renderPagination(totalPages) {
+        if (totalPages <= 1) {
+          pagination.innerHTML = "";
+          return;
+        }
+        var html =
+          '<button class="page-btn" ' +
+          (currentPage === 1 ? "disabled" : "") +
+          ' data-page="prev">이전</button>';
+        for (var i = 1; i <= totalPages; i += 1) {
+          html +=
+            '<button class="page-btn ' +
+            (i === currentPage ? "active" : "") +
+            '" data-page="' +
+            i +
+            '">' +
+            i +
+            "</button>";
+        }
+        html +=
+          '<button class="page-btn" ' +
+          (currentPage === totalPages ? "disabled" : "") +
+          ' data-page="next">다음</button>';
+        pagination.innerHTML = html;
+      }
+
+      function refreshFromStorage() {
+        state.allComments = loadAllFromStorage();
+        state.allComments.sort(function (a, b) {
+          return (b.id || 0) - (a.id || 0);
+        });
+        renderComments();
+      }
+
+      function updateChoiceUI() {
+        agreeBtn.classList.remove("active", "agree");
+        laterBtn.classList.remove("active", "later");
+        if (state.choice === "agree") agreeBtn.classList.add("active", "agree");
+        if (state.choice === "later") laterBtn.classList.add("active", "later");
+
+        var disabled = state.choice !== "agree";
+        educationOfficeInput.disabled = disabled;
+        schoolInput.disabled = disabled;
+        nicknameInput.disabled = disabled;
+        contactInput.disabled = disabled;
+        messageInput.disabled = disabled;
+        if (disabled) {
+          messageInput.placeholder = "옵션에서 '동의하고 댓글 참여하기'를 선택하면 입력할 수 있어요.";
+          setError("댓글 작성은 중간 섹션에서 동의를 선택한 경우에만 가능합니다.");
+        } else {
+          messageInput.placeholder = "선생님의 수업에서의 활용법을 자유롭게 작성해주세요";
+          setError("");
+        }
+      }
+
+      agreeBtn.addEventListener("click", function () {
+        state.choice = "agree";
+        updateChoiceUI();
+      });
+
+      laterBtn.addEventListener("click", function () {
+        state.choice = "later";
+        updateChoiceUI();
+      });
+
+      function clearBannedErrorOnInput(value) {
+        if (containsBannedWord(value)) {
+          setError("비속어가 포함된 내용은 작성할 수 없습니다.");
+          return;
+        }
+        setError("");
+      }
+
+      educationOfficeInput.addEventListener("input", function () {
+        clearBannedErrorOnInput(educationOfficeInput.value);
+      });
+      schoolInput.addEventListener("input", function () {
+        clearBannedErrorOnInput(schoolInput.value);
+      });
+      nicknameInput.addEventListener("input", function () {
+        clearBannedErrorOnInput(nicknameInput.value);
+      });
+      contactInput.addEventListener("input", function () {
+        clearBannedErrorOnInput(contactInput.value);
+      });
+      messageInput.addEventListener("input", function () {
+        clearBannedErrorOnInput(messageInput.value);
+      });
+
+      commentForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (state.choice !== "agree") {
+          setError("댓글 작성은 중간 섹션에서 동의를 선택한 경우에만 가능합니다.");
+          return;
+        }
+
+        var educationOffice = educationOfficeInput.value.trim();
+        var school = schoolInput.value.trim();
+        var nickname = nicknameInput.value.trim();
+        var contact = contactInput.value.trim();
+        var message = messageInput.value.trim();
+
+        if (websiteInput.value.trim()) {
+          setError("비정상 요청으로 감지되어 등록할 수 없습니다.");
+          return;
+        }
+
+        if (!educationOffice || !school || !nickname || !contact || !message) {
+          setError("소속 교육청, 소속 학교, 이름, 연락처, 댓글을 모두 입력해주세요.");
+          return;
+        }
+
+        if (!isValidContactFormat(contact)) {
+          setError("연락처는 000-0000-0000 형식으로 입력해주세요.");
+          return;
+        }
+
+        var lastSubmitAt = Number(localStorage.getItem(LAST_SUBMIT_KEY) || "0");
+        var now = Date.now();
+        if (now - lastSubmitAt < SUBMIT_INTERVAL_MS) {
+          var sec = Math.ceil((SUBMIT_INTERVAL_MS - (now - lastSubmitAt)) / 1000);
+          setError("연속 등록 제한 중입니다. " + sec + "초 후 다시 시도해주세요.");
+          return;
+        }
+
+        if (
+          containsBannedWord(educationOffice) ||
+          containsBannedWord(school) ||
+          containsBannedWord(nickname) ||
+          containsBannedWord(contact) ||
+          containsBannedWord(message)
+        ) {
+          setError("비속어가 포함된 댓글은 등록할 수 없습니다.");
+          return;
+        }
+
+        var dkey = dedupeKeyFrom(educationOffice, school, nickname, contact, message);
+        var existing = loadAllFromStorage();
+        if (existing.some(function (row) { return row.dedupeKey === dkey; })) {
+          setError("중복 댓글은 등록할 수 없습니다.");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "등록 중...";
+
+        try {
+          var id = Date.now();
+          var row = {
+            id: id,
+            dedupeKey: dkey,
+            nickname: maskName(nickname),
+            message: message,
+            createdAt: new Date().toLocaleString("ko-KR")
+          };
+          existing.unshift(row);
+          saveAllToStorage(existing);
+
+          submitCommentFormToGoogle();
+
+          currentPage = 1;
+          refreshFromStorage();
+          setError("");
+          localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()));
+
+          setTimeout(function () {
+            educationOfficeInput.value = "";
+            schoolInput.value = "";
+            nicknameInput.value = "";
+            contactInput.value = "";
+            messageInput.value = "";
+          }, 600);
+        } catch (e) {
+          console.error(e);
+          setError("등록 중 오류가 발생했습니다.");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "댓글 등록";
+        }
+      });
+
+      pagination.addEventListener("click", function (event) {
+        var target = event.target;
+        if (!(target instanceof HTMLButtonElement)) return;
+        var page = target.getAttribute("data-page");
+        if (!page) return;
+        var totalPages = Math.max(1, Math.ceil(state.allComments.length / PAGE_SIZE));
+        if (page === "prev") currentPage = Math.max(1, currentPage - 1);
+        else if (page === "next") currentPage = Math.min(totalPages, currentPage + 1);
+        else currentPage = Number(page);
+        renderComments();
+      });
+
+      refreshFromStorage();
+      updateChoiceUI();
+    </script>
+  </body>
+</html>
