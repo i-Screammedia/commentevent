@@ -710,11 +710,102 @@
         margin-top: 10px;
         line-height: 1.55;
         word-break: break-word;
+        text-align: left;
+      }
+
+      .comment-text-toggle {
+        margin-top: 8px;
+      }
+
+      .comment-text-toggle-summary {
+        list-style: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid #7dd3fc;
+        background: #eff6ff;
+        color: #075985;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .comment-text-toggle-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .comment-text-toggle-arrow {
+        font-size: 10px;
+        line-height: 1;
+        transition: transform 0.2s ease;
+      }
+
+      .comment-text-toggle[open] .comment-text-toggle-arrow {
+        transform: rotate(180deg);
+      }
+
+      .comment-text-full {
+        margin-top: 8px;
+        line-height: 1.35 !important;
+        text-indent: 0;
+        letter-spacing: 0;
+        white-space: normal;
+      }
+
+      .comment-text-full p {
+        margin: 0;
+      }
+
+      .comment-text-full p + p {
+        margin-top: 3px;
+      }
+
+      .comment-text-full .comment-text-step {
+        margin-top: 6px;
+        font-weight: 700;
       }
 
       .comment-example-wrap > .comment-example + .comment-example {
         margin-top: 12px;
         padding-top: 16px;
+      }
+
+      .comment-example-more {
+        margin-top: 12px;
+      }
+
+      .comment-example-more-summary {
+        list-style: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border: 1px solid #7dd3fc;
+        border-radius: 999px;
+        background: #f0f9ff;
+        color: #075985;
+        font-weight: 800;
+      }
+
+      .comment-example-more-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .comment-example-more-arrow {
+        font-size: 11px;
+        line-height: 1;
+        transition: transform 0.2s ease;
+      }
+
+      .comment-example-more[open] .comment-example-more-arrow {
+        transform: rotate(180deg);
+      }
+
+      .comment-example-more-list {
+        margin-top: 12px;
       }
 
       .comment-list {
@@ -1329,22 +1420,48 @@
               <p class="comment-name">김**</p>
               <p class="comment-time">2026-05-01</p>
             </div>
-            <p class="comment-text">영어 수업에 AI 디지털 교육자료를 사용해서 발음 연습도 하고 단어도 여러 플래시 카드 형태로 학습을 시켜보니 아이들 참여가 눈에 띄게 좋아졌어요. 수준별로 반복 연습이 가능해 아쉬웠던 격차를 줄일 수 있어 계속 활용할 예정입니다.</p>
+            <p class="comment-text">안녕하세요. 저는 수학 5-6학년을 사용하고 있습니다. 저는 아이스크림 AIDT를 다음과 같이 사용하고 있습니다...</p>
+            <details class="comment-text-toggle">
+              <summary class="comment-text-toggle-summary">
+                <span>전체 보기</span>
+                <span class="comment-text-toggle-arrow" aria-hidden="true">▼</span>
+              </summary>
+              <div class="comment-text comment-text-full">
+                <p>안녕하세요. 저는 수학 5-6학년을 사용하고 있습니다. 저는 아이스크림 AIDT를 다음과 같이 사용하고 있습니다.</p>
+                <p class="comment-text-step">1. 챗봇으로 수업 팁 확인</p>
+                <p>우선 수업 시작 전에 간단하게 챗봇으로 "수업 팁"이라고 넣어서 대략적인 오늘의 수업할 내용을 빠르게 파악합니다.</p>
+                <p class="comment-text-step">2. 문제지 만들기</p>
+                <p>과제 만들기에 들어가면 문제지 만들기라는 좋은 기능이 있더라구요.</p>
+                <p>상중하 수준별로 문제지를 만들어서 과제로 뿌릴 수 있어서 미리 출제해서 학생들에게 배포해둔 후 수업 중에 추가 자료로 활용하고 있습니다.</p>
+                <p class="comment-text-step">3. 형성평가</p>
+                <p>형성평가는 항상 안 놓치려고 합니다. 그런데 처음에는 응시일이 차시 수업 완료 후 7일내로 자동 설정되어서 그걸 모르고 있다가 놓쳤었는데, 전화 문의했더니 원하는 차시를 "수업 시작"을 다시 눌렀다가 종료하니 재응시가 가능하더라구요. 이 기능도 2학기부터는 고쳐진다고 하고 선생님이 재응시 기회 부여 권한을 주신다고 하니.. 계속 개선되어서 좋은 것 같습니다.</p>
+                <p class="comment-text-step">4. 스스로 학습</p>
+                <p>아이들이 포인트로 아바타를 구매하려고 알아서 문제를 많이 풀더라구요. 스스로 학습 회수를 올릴 수 있도록 숙제로 최소 1회는 풀 수 있도록 장려하고 있습니다.</p>
+              </div>
+            </details>
           </div>
-          <div class="comment-example">
-            <div class="comment-meta">
-              <p class="comment-name">최**</p>
-              <p class="comment-time">2026-05-02</p>
+          <details class="comment-example-more">
+            <summary class="comment-example-more-summary">
+              <span>예시 더보기</span>
+              <span class="comment-example-more-arrow" aria-hidden="true">▼</span>
+            </summary>
+            <div class="comment-example-more-list">
+              <div class="comment-example">
+                <div class="comment-meta">
+                  <p class="comment-name">김**</p>
+                  <p class="comment-time">2026-05-01</p>
+                </div>
+                <p class="comment-text">영어 수업에 AI 디지털 교육자료를 사용해서 발음 연습도 하고 단어도 여러 플래시 카드 형태로 학습을 시켜보니 아이들 참여가 눈에 띄게 좋아졌어요. 수준별로 반복 연습이 가능해 아쉬웠던 격차를 줄일 수 있어 계속 활용할 예정입니다.</p>
+              </div>
+              <div class="comment-example">
+                <div class="comment-meta">
+                  <p class="comment-name">권**</p>
+                  <p class="comment-time">2026-05-03</p>
+                </div>
+                <p class="comment-text">학급 수준 편차가 커 과제 제출하기가 어려웠는데, 성취 기준별로 과제를 내고 가지고 있는 자료로도 바로 출제 할 수 있어서 준비 시간이 줄었어요.</p>
+              </div>
             </div>
-            <p class="comment-text">수학 시간에 단원 도입 영상과 과제 등을 AI 디지털 교육자료를 활용해서 진행했더니 집중하는 학생이 확실히 늘었어요. 설명만 반복하던 수업에서 벗어나 아이들이 스스로 탐구할 시간이 생겨 만족스럽습니다.</p>
-          </div>
-          <div class="comment-example">
-            <div class="comment-meta">
-              <p class="comment-name">권**</p>
-              <p class="comment-time">2026-05-03</p>
-            </div>
-            <p class="comment-text">학급 수준 편차가 커 과제 제출하기가 어려웠는데, 성취 기준별로 과제를 내고 가지고 있는 자료로도 바로 출제 할 수 있어서 준비 시간이 줄었어요.</p>
-          </div>
+          </details>
         </div>
 
         <ul id="commentList" class="comment-list"></ul>
@@ -1408,6 +1525,8 @@
       const COMMENTS_JSON_URL = "https://script.google.com/macros/s/AKfycbymtPmVNuXEdbUUKN5p0BWkDOC8DeKMA43EItI6APfzDtEs6mhu4vzoeROwyhibE_zSgg/exec";
 
       const LOCAL_STORAGE_KEY = "aidt_comment_event_comments_v2";
+      /** 이 시각 이전 댓글은 목록에서 숨김(목록 초기화용) */
+      const COMMENT_RESET_AT = "2026-05-13T16:55:00+09:00";
       const state = {
         allComments: [],
         totalCount: 0,
@@ -1428,7 +1547,7 @@
       const countBadge = document.getElementById("countBadge");
       const pagination = document.getElementById("pagination");
       const websiteInput = document.getElementById("websiteInput");
-      const PAGE_SIZE = 5;
+      const PAGE_SIZE = 20;
       const LAST_SUBMIT_KEY = "comment_last_submit_at";
       const SUBMIT_INTERVAL_MS = 15000;
       let currentPage = 1;
@@ -1518,6 +1637,7 @@
 
       function normalizeCommentRows(data) {
         var list = Array.isArray(data) ? data : Array.isArray(data && data.data) ? data.data : [];
+        var cutoff = Date.parse(COMMENT_RESET_AT);
 
         return list
           .map(function (row, idx) {
@@ -1530,7 +1650,30 @@
           })
           .filter(function (row) {
             return row.nickname && row.message;
+          })
+          .filter(function (row) {
+            if (!Number.isFinite(cutoff)) return true;
+            return parseCommentDate(row.createdAt) >= cutoff;
           });
+      }
+
+      function parseCommentDate(value) {
+        var s = String(value || "").trim();
+        if (!s) return 0;
+        var direct = Date.parse(s);
+        if (Number.isFinite(direct)) return direct;
+        var normalized = s.replace(/\./g, "-").replace(/\//g, "-").replace(" ", "T");
+        var parsed = Date.parse(normalized);
+        if (Number.isFinite(parsed)) return parsed;
+        var m = s.match(/(\d{4})-(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?/);
+        if (!m) return 0;
+        var year = Number(m[1]);
+        var month = Number(m[2]) - 1;
+        var day = Number(m[3]);
+        var hour = Number(m[4]);
+        var minute = Number(m[5]);
+        var second = Number(m[6] || 0);
+        return new Date(year, month, day, hour, minute, second).getTime();
       }
 
       function normalizeCommentList(data) {
@@ -1677,6 +1820,12 @@
 
       function refreshFromStorage() {
         state.allComments = loadAllFromStorage();
+        var cutoff = Date.parse(COMMENT_RESET_AT);
+        if (Number.isFinite(cutoff)) {
+          state.allComments = state.allComments.filter(function (row) {
+            return parseCommentDate(row.createdAt) >= cutoff;
+          });
+        }
         state.allComments.sort(function (a, b) {
           return (b.id || 0) - (a.id || 0);
         });
