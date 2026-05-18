@@ -20,6 +20,20 @@
         --danger: #e11d48;
         --card-line: #fed7aa;
         --card-shadow: 0 10px 24px rgba(180, 83, 9, 0.1), 0 2px 6px rgba(180, 83, 9, 0.06);
+        --container-max: 1100px;
+        --pad-x: clamp(14px, 3.2vw, 28px);
+        --pad-y: clamp(18px, 3.8vw, 44px);
+        --section-pad: clamp(16px, 2.8vw, 24px);
+        --section-radius: clamp(22px, 3.5vw, 30px);
+        --hero-title: clamp(30px, 5.6vw + 0.45rem, 72px);
+        --hero-badge: clamp(14px, 1.5vw + 0.2rem, 20px);
+        --hero-date: clamp(20px, 2.6vw + 0.2rem, 34px);
+        --hero-sub: clamp(14px, 1.5vw + 0.35rem, 20px);
+        --intro-title: clamp(26px, 4.2vw + 0.3rem, 52px);
+        --intro-body: clamp(17px, 2.4vw + 0.2rem, 32px);
+        --guide-title: clamp(28px, 3.6vw + 0.3rem, 44px);
+        --guide-text: clamp(17px, 2.2vw + 0.15rem, 30px);
+        --guide-date: clamp(22px, 3.4vw + 0.2rem, 43px);
       }
 
       * {
@@ -28,6 +42,7 @@
 
       body {
         margin: 0;
+        overflow-x: hidden;
         font-family:
           "Pretendard",
           -apple-system,
@@ -53,19 +68,19 @@
 
       .container {
         width: 100%;
-        max-width: 1100px;
+        max-width: var(--container-max);
         margin: 0 auto;
         min-height: 100vh;
-        padding: 28px 20px 44px;
+        padding: var(--pad-y) var(--pad-x) calc(var(--pad-y) + 8px);
       }
 
       .section {
         background: var(--card);
         border: 1px solid var(--card-line);
-        border-radius: 30px;
-        padding: 24px;
+        border-radius: var(--section-radius);
+        padding: var(--section-pad);
         box-shadow: var(--card-shadow);
-        margin-top: 20px;
+        margin-top: clamp(14px, 2.5vw, 20px);
       }
 
       .hero {
@@ -73,8 +88,8 @@
         position: relative;
         overflow: hidden;
         background: linear-gradient(180deg, #fb923c 0%, #ea580c 100%);
-        padding: 30px 34px 54px;
-        border-radius: 38px;
+        padding: clamp(22px, 4vw, 30px) clamp(16px, 4.2vw, 34px) clamp(38px, 6.5vw, 54px);
+        border-radius: clamp(26px, 4.8vw, 38px);
         text-align: left;
         border: 1px solid rgba(255, 255, 255, 0.35);
         box-shadow: 0 16px 34px rgba(124, 45, 18, 0.28);
@@ -108,7 +123,7 @@
         display: inline-block;
         opacity: 1;
         font-weight: 700;
-        font-size: 20px;
+        font-size: var(--hero-badge);
         color: #7c2d12;
         background: rgba(255, 255, 255, 0.96);
         border: 1px solid rgba(255, 255, 255, 0.95);
@@ -117,43 +132,93 @@
       }
 
       .hero h1 {
-        margin: 16px 0 0;
-        line-height: 1.15;
-        font-size: 72px;
+        margin: clamp(12px, 2vw, 16px) 0 0;
+        line-height: 1.18;
+        font-size: var(--hero-title);
         font-weight: 900;
         letter-spacing: -0.03em;
         color: #fffbeb;
         text-shadow: 0 4px 10px rgba(124, 45, 18, 0.36);
         text-align: center;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+      }
+
+      .hero-aidt-wrap {
+        display: inline-block;
+        position: relative;
+        padding-top: clamp(0.38em, 2.5vw, 0.52em);
+        max-width: 100%;
       }
 
       .hero-aidt {
         display: inline-block;
-        padding: 2px 14px 4px;
-        border-radius: 14px;
+        position: relative;
+        z-index: 1;
+        max-width: 100%;
+        padding: 2px clamp(8px, 1.8vw, 14px) 4px;
+        border-radius: clamp(10px, 1.8vw, 14px);
         background: linear-gradient(90deg, #ffd54f 0%, #ffb300 100%);
         color: #7c2d12;
         text-shadow: none;
         box-shadow: 0 6px 14px rgba(124, 45, 18, 0.28);
         border: 2px solid rgba(255, 255, 255, 0.75);
-        margin-right: 6px;
+      }
+
+      .hero-aidt-tag {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        transform: translate(-28%, 10%) rotate(-16deg);
+        transform-origin: 94% 100%;
+        pointer-events: none;
+        font-size: 0.28em;
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+        padding: 5px 10px 6px;
+        border-radius: 8px 8px 8px 3px;
+        background: linear-gradient(145deg, #bfdbfe 0%, #3b82f6 55%, #1d4ed8 100%);
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(30, 58, 138, 0.45);
+        border: 2px solid rgba(255, 255, 255, 0.92);
+        box-shadow: 0 4px 14px rgba(29, 78, 216, 0.42);
+      }
+
+      .hero-aidt-tag::after {
+        content: "";
+        position: absolute;
+        right: 9px;
+        bottom: -8px;
+        width: 2px;
+        height: 11px;
+        background: rgba(255, 255, 255, 0.75);
+        transform: rotate(6deg);
+        border-radius: 1px;
       }
 
       .hero-date {
         margin: 0;
-        margin-top: 16px;
-        font-size: 34px;
+        margin-top: clamp(10px, 2vw, 16px);
+        font-size: var(--hero-date);
         font-weight: 800;
         color: #ffd54f;
         text-shadow: 0 4px 10px rgba(124, 45, 18, 0.32);
+        text-align: center;
       }
 
       .hero-sub {
-        margin: 10px 0 0;
-        font-size: 20px;
-        line-height: 1.5;
+        margin: clamp(8px, 1.5vw, 10px) 0 0;
+        max-width: none;
+        font-size: var(--hero-sub);
+        line-height: 1.55;
         color: #ffedd5;
         font-weight: 600;
+        text-align: left;
+        word-break: keep-all;
+        overflow-wrap: break-word;
       }
 
       .top-brand {
@@ -218,23 +283,26 @@
       .hero-intro h3 {
         margin: 0;
         color: #f97316;
-        font-size: 52px;
-        line-height: 1.25;
-        white-space: nowrap;
+        font-size: var(--intro-title);
+        line-height: 1.28;
+        white-space: normal;
+        word-break: keep-all;
       }
 
       .hero-intro p {
         margin: 8px 0 0;
-        font-size: 32px;
+        font-size: var(--intro-body);
         line-height: 1.45;
         color: #4b5563;
         font-weight: 700;
         text-align: center;
+        word-break: keep-all;
+        overflow-wrap: break-word;
       }
 
       .hero-intro-single-line {
-        white-space: nowrap;
-        display: inline-block;
+        white-space: normal;
+        display: inline;
       }
 
       .event-guide {
@@ -255,10 +323,11 @@
       .event-guide-title {
         margin: 0;
         text-align: center;
-        font-size: 44px;
+        font-size: var(--guide-title);
         font-weight: 900;
         color: #c2410c;
-        line-height: 1;
+        line-height: 1.12;
+        word-break: keep-all;
       }
 
       .event-guide-title b {
@@ -267,7 +336,7 @@
       }
 
       .event-guide-icon {
-        font-size: 42px;
+        font-size: clamp(28px, 3.5vw, 42px);
         line-height: 1;
       }
 
@@ -279,18 +348,18 @@
 
       .event-guide-row {
         display: grid;
-        grid-template-columns: 138px 1fr;
-        gap: 14px;
+        grid-template-columns: minmax(108px, 138px) 1fr;
+        gap: clamp(10px, 2vw, 14px);
         align-items: center;
       }
 
       .event-guide-chip {
         border-radius: 999px;
-        padding: 10px 14px;
+        padding: clamp(8px, 1.5vw, 10px) clamp(10px, 2vw, 14px);
         text-align: center;
         font-weight: 800;
         color: #fff;
-        font-size: 23px;
+        font-size: clamp(16px, 2vw, 23px);
         letter-spacing: -0.02em;
         border: 1px solid rgba(255, 255, 255, 0.45);
         background: linear-gradient(90deg, #fb923c 0%, #ea580c 100%);
@@ -299,19 +368,21 @@
 
       .event-guide-text {
         margin: 0;
-        font-size: 30px;
+        font-size: var(--guide-text);
         font-weight: 700;
         color: #1f2937;
         letter-spacing: -0.03em;
+        word-break: keep-all;
+        overflow-wrap: break-word;
       }
 
       .event-guide-date {
-        font-size: 43px;
+        font-size: var(--guide-date);
       }
 
       .event-guide-note {
         margin: 6px 0 0;
-        font-size: 24px;
+        font-size: clamp(16px, 2vw, 24px);
         font-weight: 900;
         line-height: 1.35;
         color: #c26767;
@@ -320,8 +391,8 @@
 
       .event-guide-body {
         display: grid;
-        grid-template-columns: 1fr 180px;
-        gap: 8px 18px;
+        grid-template-columns: 1fr minmax(100px, 180px);
+        gap: 8px clamp(12px, 2vw, 18px);
         align-items: end;
       }
 
@@ -395,7 +466,7 @@
 
       .excellent-benefits-title {
         margin: 0;
-        font-size: 30px;
+        font-size: clamp(22px, 3.2vw, 30px);
         font-weight: 900;
         color: #0f172a;
         letter-spacing: -0.04em;
@@ -406,8 +477,8 @@
       .excellent-benefits-grid {
         margin-top: 22px;
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: clamp(14px, 2.5vw, 20px);
       }
 
       .excellent-benefit-card {
@@ -472,7 +543,7 @@
         margin-top: 12px;
         display: grid;
         gap: 10px;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
       }
 
       .choice-btn {
@@ -666,6 +737,17 @@
       textarea {
         min-height: 110px;
         resize: vertical;
+      }
+
+      #messageInput {
+        min-height: 132px;
+        line-height: 1.5;
+      }
+
+      #messageInput::placeholder {
+        color: #9a3412;
+        font-weight: 600;
+        opacity: 1;
       }
 
       .submit-btn {
@@ -904,16 +986,27 @@
         cursor: not-allowed;
       }
 
-      @media (max-width: 768px) {
-        .container {
-          max-width: 430px;
-          padding: 20px 14px 28px;
-          background: var(--bg);
+      @media (max-width: 1024px) {
+        .event-guide-body {
+          grid-template-columns: 1fr;
         }
 
-        .section {
-          border-radius: 24px;
-          padding: 18px;
+        .event-guide-deco {
+          justify-self: center;
+          width: min(160px, 42vw);
+          height: auto;
+          min-height: 92px;
+        }
+
+        .hero::after {
+          right: 12%;
+          width: min(120px, 22vw);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          background: var(--bg);
         }
 
         .top-brand {
@@ -925,30 +1018,24 @@
           gap: 8px;
         }
 
-        .hero {
-          text-align: left;
-        }
-
         .top-brand-logo {
-          height: 36px;
+          height: clamp(32px, 8vw, 40px);
           max-width: min(150px, 58vw);
         }
 
         .top-brand-rank {
-          height: 36px;
+          height: clamp(32px, 8vw, 40px);
           max-width: 46px;
         }
 
-        .hero h1 {
-          font-size: 42px;
+        .hero-aidt-tag {
+          transform: translate(-24%, 6%) rotate(-16deg);
+          padding: 4px 8px 5px;
         }
 
-        .hero p {
-          font-size: 18px;
-        }
-
-        .hero-card {
-          font-size: 22px;
+        .hero-aidt-tag::after {
+          height: 9px;
+          bottom: -7px;
         }
 
         .hero-intro {
@@ -956,84 +1043,23 @@
           max-width: 100%;
         }
 
-        .hero-intro h3 {
-          font-size: 38px;
-          white-space: normal;
+        .event-guide-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
         }
 
-        .hero-intro p {
-          font-size: 24px;
-        }
-
-        .hero-intro-single-line {
-          white-space: normal;
+        .event-guide-chip {
+          width: fit-content;
+          max-width: 100%;
         }
 
         .choice-grid {
           grid-template-columns: 1fr;
         }
 
-        .excellent-benefits-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .excellent-benefits-title {
-          font-size: 22px;
-        }
-
-        .excellent-benefit-index {
-          font-size: 19px;
-        }
-
-        .excellent-benefit-text {
-          font-size: 18px;
-        }
-
         .excellent-benefit-icon {
-          width: 108px;
-          height: 108px;
-        }
-
-        .excellent-benefits-note {
-          font-size: 16px;
-        }
-
-        .event-guide-title {
-          font-size: 32px;
-        }
-
-        .event-guide-icon {
-          font-size: 32px;
-        }
-
-        .event-guide-body {
-          grid-template-columns: 1fr;
-          gap: 10px;
-        }
-
-        .event-guide-deco {
-          width: 120px;
-          height: 92px;
-          border-radius: 14px;
-          font-size: 44px;
-          justify-self: end;
-        }
-
-        .event-guide-row {
-          grid-template-columns: 1fr;
-          gap: 8px;
-        }
-
-        .event-guide-text {
-          font-size: 18px;
-        }
-
-        .event-guide-date {
-          font-size: 20px;
-        }
-
-        .event-guide-note {
-          font-size: 16px;
+          width: clamp(88px, 24vw, 108px);
+          height: clamp(88px, 24vw, 108px);
         }
 
         .comment-example-badge {
@@ -1072,6 +1098,40 @@
 
         .section-comment-event .comment-example {
           padding: 28px 16px 18px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-aidt-wrap {
+          padding-top: 0.42em;
+        }
+
+        .hero-aidt-tag {
+          transform: translate(-18%, 4%) rotate(-14deg);
+          font-size: 0.32em;
+        }
+
+        .hero-sub {
+          max-width: 100%;
+          padding: 0 4px;
+        }
+
+        .hero::before {
+          height: 56px;
+          bottom: -28px;
+        }
+
+        .hero::after {
+          display: none;
+        }
+
+        .event-prize-hero {
+          border-radius: 16px;
+        }
+
+        .notice-section {
+          padding: 16px 14px;
+          border-radius: 20px;
         }
       }
 
@@ -1285,9 +1345,11 @@
 
       <section class="section hero">
         <small>댓글 이벤트</small>
-        <h1><span class="hero-aidt">AI 디지털 교육자료</span> 활용에 대한<br />선생님의 아이디어를 들려주세요!</h1>
+        <h1>
+          <span class="hero-aidt-wrap"><span class="hero-aidt-tag">구, AIDT</span><span class="hero-aidt">AI 디지털 교육자료</span></span><br />수업 활용 사례 댓글 공모전
+        </h1>
         <p class="hero-date">참여 기간 5/18~5/31</p>
-        <p class="hero-sub">선생님의 수업 활용 경험을 자유롭게 작성해 주세요.</p>
+        <p class="hero-sub">💡 본 이벤트는 수학·영어 AI 디지털 교육자료(AIDT)를 사용해보신 선생님들을 위한 이벤트입니다.<br />(※ 기존 아이스크림미디어 에듀테크 서비스인 띵커벨, AI 매일수학, 클래스툴 등은 이벤트 대상에서 제외됩니다.)</p>
       </section>
 
       <section class="hero-intro">
@@ -1468,7 +1530,7 @@
             <textarea
               id="messageInput"
               name="entry.726953345"
-              placeholder="선생님의 수업에서의 활용법을 자유롭게 작성해주세요"
+              placeholder="⚠️ 잠깐! 작성 전 확인해 주세요. 아이스크림 AI·디지털 교육자료(AIDT) 등을 활용한 사례만 정상 참여로 인정됩니다."
             ></textarea>
           </div>
           <div class="bot-trap" aria-hidden="true">
@@ -1551,6 +1613,7 @@
           <li>이벤트 참여시 입력한 정보가 부정확하여 경품을 수령하지 못한 경우 재발송이 불가합니다.</li>
           <li>이벤트 내용은 상황에 따라 조기 종료 혹은 변경될 수 있으며, 변경시 경품은 동일 조건의 다른 상품으로 변경됩니다.</li>
           <li>작성한 활용 소감은 마케팅 및 서비스 개선에 활용될 수 있습니다.</li>
+          <li>AI 디지털교육자료(AIDT)가 아닌 아이스크림미디어의 일반 에듀테크 서비스(띵커벨, 매일수학 등) 활용 수기는 추점 대상 및 우수 후기 선정에서 제외될 수 있습니다.</li>
         </ol>
 
         <h3 class="notice-subtitle">경품 당첨자 유의 사항</h3>
@@ -1919,7 +1982,8 @@
           messageInput.placeholder = "위에서 개인정보 수집·이용에 동의하시면 입력할 수 있어요.";
           setError("댓글 작성은 개인정보 수집·이용 동의 후에만 가능합니다.");
         } else {
-          messageInput.placeholder = "선생님의 수업에서의 활용법을 자유롭게 작성해주세요";
+          messageInput.placeholder =
+            "⚠️ 잠깐! 작성 전 확인해 주세요. 아이스크림 AI·디지털 교육자료(AIDT) 등을 활용한 사례만 정상 참여로 인정됩니다.";
           setError("");
         }
       }
